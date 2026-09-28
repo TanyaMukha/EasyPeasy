@@ -32,7 +32,7 @@
         <ApplicationTitle>EasyPeasy</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.easyenglish.app</ApplicationId>
+        <ApplicationId>ua.mukhalab.easypeasy</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

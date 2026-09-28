@@ -86,17 +86,17 @@ for you.
 
 | Project | Tests | Notes |
 |---|---|---|
-| `EasyPeasy.Core.Tests` | 52 | Pure POCOs mostly untested by design; the 3 pockets of real logic (`TestCardConverters` JSON pack/unpack, `MappingActions`, `RateExtensions`) are covered, plus a container-level guard that every mapping action/converter the profile uses is actually DI-registered. |
+| `EasyPeasy.Core.Tests` | 78 | Pure POCOs mostly untested by design; the 3 pockets of real logic (`TestCardConverters` JSON pack/unpack, `MappingActions`, `RateExtensions`) are covered, plus a container-level guard that every mapping action/converter the profile uses is actually DI-registered. |
 | `EasyPeasy.Data.Tests` | 41 | Real in-memory SQLite `DbContext`. |
 | `EasyPeasy.Business.Tests` | 29 | Real-SQLite integration tests for `UnitService.ReconcileAndUpdateAsync`, including GUID-only identity and partial-payload merging. |
 | `EasyPeasy.Cache.Tests` | 19 | `NSubstitute` for `IWordService`/`IUnitService`; a real `IServiceScopeFactory` (not mocked) to exercise the actual DI-scope-per-fetch mechanism. |
-| `EasyPeasy.App.Tests` | 224 | Pure-logic subset of `EasyPeasy.App/Services/` only — see that project's README for why the test project can't `ProjectReference` the MAUI head project. |
+| `EasyPeasy.App.Tests` | 243 | Pure-logic subset of `EasyPeasy.App/Services/` only — see that project's README for why the test project can't `ProjectReference` the MAUI head project. |
 | `MukhaLab.SelectQueryParameters.Tests` | 53 | Includes a supplementary real-SQLite check that filter expressions are actually SQL-translatable, not just LINQ-to-Objects-compatible. |
 | `MukhaLab.Database.Tests` | 47 | Real SQLite in-memory connection. |
 | `MukhaLab.BrowserConsoleLogger.Tests` | 32 | `NSubstitute` for `IJSRuntime`; `[InternalsVisibleTo]` exposes an internal accessor so async flush behavior can be awaited deterministically instead of polled. |
 | `MukhaLab.LoggerExtensionDelegate.Tests` | 28 | `Microsoft.Extensions.Diagnostics.Testing`'s `FakeLogger`/`FakeLogCollector`. |
 
-**525 tests total**, all green as of the last full solution run.
+**570 tests total**, all green as of the last full solution run.
 
 ## What's not covered, and why that's a deliberate choice, not an oversight
 

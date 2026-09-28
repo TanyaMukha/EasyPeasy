@@ -13,7 +13,7 @@ visually, and [project-dependencies.puml](../Diagrams/project-dependencies.puml)
   ("models"), repository/service interfaces, enums, AutoMapper profiles, rating/difficulty
   extensions. No EF Core, no MAUI — every other `EasyPeasy.*` project depends on this one, and it
   depends on nothing but `MukhaLab.Database` (for `AbstractEntity`/`IGuidRecord`/`IUserContext`).
-  52 tests in `EasyPeasy.Core.Tests`.
+  78 tests in `EasyPeasy.Core.Tests`.
 
 - **[EasyPeasy.Data](../../EasyPeasy.Data/README.md)** — EF Core/SQLite implementation of
   Core's repository interfaces, plus the `DbContext`, migrations, and learning-query filter/sort
@@ -37,7 +37,7 @@ visually, and [project-dependencies.puml](../Diagrams/project-dependencies.puml)
   and `EasyPeasy.Business`, wiring the former's concrete repositories to the latter's interfaces
   via DI in `MauiProgram.cs`. The linked README covers `Services/` (the app-local, non-Razor
   service layer — MAUI platform glue, TTS, pronunciation checking, markdown rendering, spaced
-  repetition rating); the Razor components/pages themselves aren't documented yet. 224 tests in
+  repetition rating); the Razor components/pages themselves aren't documented yet. 243 tests in
   `EasyPeasy.App.Tests` cover the pure-logic subset of `Services/` (see that README's Testing
   section for why the test project is structured unusually).
 

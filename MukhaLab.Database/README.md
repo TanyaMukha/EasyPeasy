@@ -21,7 +21,7 @@ entity in the app.
 - [Error handling](#error-handling)
 - [Transactions](#transactions)
 - [GUID identity (`BaseWithGuidRepository`/`BaseWithGuidService`)](#guid-identity-basewithguidrepositorybasewithguidservice)
-- [Real usage in EasyPeasy](#real-usage-in-easyenglish)
+- [Real usage in EasyPeasy](#real-usage-in-easypeasy)
 - [Known issues & risks](#known-issues--risks)
 - [Suggested improvements](#suggested-improvements)
 - [Troubleshooting](#troubleshooting)
@@ -218,7 +218,7 @@ not enough:
 > gets scoped to rows literally owned by `Guid.Empty`. To genuinely disable per-user scoping, either
 > don't call `ConfigureUserIdField` at all, or construct the repository with `userContext: null`.
 > EasyPeasy.App registers `AnonymousUserContext` but never calls `ConfigureUserIdField` anywhere,
-> so scoping is effectively inactive there today — see [Real usage in EasyPeasy](#real-usage-in-easyenglish).
+> so scoping is effectively inactive there today — see [Real usage in EasyPeasy](#real-usage-in-easypeasy).
 
 ## Error handling
 

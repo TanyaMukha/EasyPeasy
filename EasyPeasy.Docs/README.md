@@ -83,7 +83,7 @@ diagrams silently fail. See
 | [solution-structure.md](Guides/solution-structure.md) | Every project, one paragraph each, linking to its own README. |
 | [conventions.md](Guides/conventions.md) | Naming, language (code vs. UI text), exceptions, DI, testing, documentation conventions — and the gotchas that don't follow from reading any single file. |
 | [entry-notation.md](Guides/entry-notation.md) | How a word or phrase is written so that one entry accepts every correct typing of it: `[]` optional parts, `{}` for a leading `a`/`an`/`the`/`to` that belongs to the entry, `/` alternatives, sb/sth placeholders. |
-| [testing-strategy.md](Guides/testing-strategy.md) | The risk-based framework used to decide what to test in every project, plus a coverage summary (525 tests across 9 `.Tests` projects as of the last full run). |
+| [testing-strategy.md](Guides/testing-strategy.md) | The risk-based framework used to decide what to test in every project, plus a coverage summary (570 tests across 9 `.Tests` projects as of the last full run). |
 | [course-archive-authoring.md](Guides/course-archive-authoring.md) | The course-ZIP format and how to build one by hand: manifest as the only index, `RecordGuid` vs `Id`, the ContentTools authoring run, and what to check before importing. |
 | [course-design.md](Guides/course-design.md) | How to sequence a module so it teaches: the recognition-to-production ladder across the card kinds, module sizing, grading a grammar point, and near-synonym traps. |
 
@@ -94,8 +94,9 @@ covering, among others: why `EasyPeasy.Business` has no project reference to `Ea
 why project names avoid `DAL`/`BLL`-style acronyms; what qualifies code for extraction into a
 `MukhaLab.*` library; the DI captive-dependency fix pattern; the `EntityNotFoundException`
 convention; how `null` is handled during reconcile operations; the `LearningPriority.Old` semantics
-decision; why `EasyPeasy.App.Tests` can't `ProjectReference` the MAUI app project; and what the
-EasyEnglish → EasyPeasy rename deliberately left alone.
+decision; why `EasyPeasy.App.Tests` can't `ProjectReference` the MAUI app project; and how the
+EasyEnglish → EasyPeasy rename handled the two names that carry data — the database file, which
+the app moves for itself, and the package id, which it cannot.
 
 ## Per-project READMEs (not duplicated here)
 

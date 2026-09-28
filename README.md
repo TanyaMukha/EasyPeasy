@@ -82,7 +82,7 @@ Run the app on Windows:
 dotnet build EasyPeasy.App/EasyPeasy.App.csproj -f net9.0-windows10.0.19041.0
 ```
 
-Run every test project (551 tests across 9 of them):
+Run every test project (570 tests across 9 of them):
 
 ```bash
 dotnet test EasyPeasy.sln
@@ -128,16 +128,18 @@ documentation starts.
 
 ## Renaming
 
-The solution was renamed from **EasyEnglish** to **EasyPeasy**. Two things deliberately kept the
-old name, because they are identity rather than naming:
+The solution was renamed from **EasyEnglish** to **EasyPeasy**, and the two names that are identity
+rather than labels were carried over rather than simply rewritten:
 
-- **`EasyEnglish.db`** — the SQLite file in the device's app-data folder. Renaming it would leave
-  every existing database behind a fresh empty one. To rename it, the app has to move the file
-  (together with its `-wal`/`-shm` companions) on first start, or the content has to be exported
-  and re-imported as ZIP.
-- **`com.companyname.easyenglish.app`** — the `ApplicationId`. On Android and Windows this is the
-  package identity: a new id installs as a separate app with an empty sandbox, so changing it is a
-  migration rather than a rename.
+- **`ApplicationId`** is now `ua.mukhalab.easypeasy`. On Android and Windows this is the package
+  identity, so an installed build under the old id stays on the device as a separate app with its
+  own data — export the courses as ZIP from it before switching, or reinstall and re-import.
+- **The database file** is now `mukhalab.easypeasy.db`. The app renames an existing
+  `EasyEnglish.db` on first start (`MauiProgram.MoveDatabaseFromLegacyName`), together with its
+  `-wal` and `-shm` companions, so nothing has to be exported: a pending write-ahead log travels
+  with the database instead of being left behind. The move only runs when the new file is absent
+  and the old one is there, and a failure is logged rather than thrown — worst case the app opens
+  an empty database instead of refusing to start.
 
 The repository folder itself is still named `EasyEnglish`; renaming it is a local operation, done
 with the IDE closed.

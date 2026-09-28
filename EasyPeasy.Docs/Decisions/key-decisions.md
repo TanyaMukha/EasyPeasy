@@ -243,27 +243,37 @@ desirable outcome here but would surprise anyone expecting whole-course "last wr
 
 ---
 
-## 13. The EasyEnglish → EasyPeasy rename stopped at identity
+## 13. Finishing the rename: the database file moves itself, the package id does not
 
 **Context**: The solution was renamed from `EasyEnglish` to `EasyPeasy` — projects, namespaces,
-assemblies, file names, documents. Two names, however, are not labels: they are how the platform
-and the file system find data that already exists.
+assemblies, file names, documents. Two names were held back at first, because they are not labels
+but how the platform and the file system find data that already exists: the SQLite file and the
+`ApplicationId`. Leaving them was meant to be temporary, and it read as an unfinished rename.
 
-**Decision**: Keep both under their old name, and say why in the code:
+**Decision**: Rename both, and carry the data across where the app is able to.
 
-- **`EasyEnglish.db`** — the SQLite file in `Environment.SpecialFolder.LocalApplicationData`
-  (`appsettings.json`, and the fallback in `MauiProgram.GetConnectionString`). A renamed file is
-  not found, EF Core creates an empty one, and the learner's courses appear to be gone while the
-  old file sits untouched next to it.
-- **`com.companyname.easyenglish.app`** — the `ApplicationId`. On Android and Windows it *is* the
-  package identity; a new id installs beside the old app with its own empty sandbox.
+- **`ApplicationId`** → `ua.mukhalab.easypeasy` (it was still the template's
+  `com.companyname.easyenglish.app`). Nothing in the app can migrate this: to the operating system
+  a new id is a different application with its own storage. An installed old build simply stays
+  installed, with its own data, until it is uninstalled.
+- **The database file** → `mukhalab.easypeasy.db`, named after the vendor and the app the way the
+  package id is. `MauiProgram.MoveDatabaseFromLegacyName` renames an existing `EasyEnglish.db`
+  before the `DbContext` is registered — but only when the new file is absent and the old one is
+  present, so it is a one-off, not something that runs on every start.
 
-**Consequences**: `grep EasyEnglish` still returns hits, which looks like an unfinished rename and
-is exactly why this entry exists. Renaming either one is a data migration with its own steps —
-moving the database file together with its `-wal`/`-shm` companions on first start, or exporting
-and re-importing content as course ZIP archives — and should be done deliberately, not as part of
-a find-and-replace.
+**Consequences**: The `-wal` and `-shm` files move together with the database. A write-ahead log
+can hold committed transactions that have not been checkpointed yet, so moving the `.db` alone
+would silently lose the last session's work — the one failure mode that would be invisible until
+much later.
 
-The repository folder is likewise still `EasyEnglish`; nothing in the build depends on it, since
-the two absolute paths Visual Studio had baked into `EasyPeasy.App.csproj` were made relative
-during the rename.
+The move is wrapped in a `try` that logs and continues. A database that cannot be moved is a bad
+day; an app that refuses to start is a worse one, and the old file is still there to recover from
+by hand.
+
+Both names being identity also means the two migrations are not symmetrical: the file move happens
+inside the same app sandbox and is automatic, while a changed package id leaves the old sandbox
+unreachable, and its content has to travel as a course ZIP export.
+
+The repository folder is still `EasyEnglish`; nothing in the build depends on it, since the two
+absolute paths Visual Studio had baked into `EasyPeasy.App.csproj` were made relative during the
+rename.

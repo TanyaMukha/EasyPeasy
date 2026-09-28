@@ -146,6 +146,8 @@ public static class MauiProgram
     {
         var connectionString = GetConnectionString(builder.Configuration);
 
+        MoveDatabaseFromLegacyName(connectionString);
+
         // ✅ Factory з правильним типом
         builder.Services.AddDbContextFactory<EasyPeasyDbContext>(options =>
         {
@@ -166,9 +168,7 @@ public static class MauiProgram
     /// </summary>
     private static string GetConnectionString(IConfiguration configuration)
     {
-        // The file keeps its old name on purpose: renaming it would hide every database that
-        // already exists on a device behind a fresh, empty one. See README, "Renaming".
-        var connectionString = configuration.GetConnectionString("DefaultConnection") ?? "Data Source=EasyEnglish.db";
+        var connectionString = configuration.GetConnectionString("DefaultConnection") ?? $"Data Source={DatabaseFileName}";
 
         // Якщо connection string містить {AppDataPath}, замінюємо на реальний шлях
         if (connectionString.Contains("{AppDataPath}"))
@@ -186,6 +186,30 @@ public static class MauiProgram
         }
 
         return connectionString;
+    }
+
+    /// <summary>The database file. Named after the vendor and the app, like the ApplicationId.</summary>
+    private const string DatabaseFileName = "mukhalab.easypeasy.db";
+
+    /// <summary>What the file was called before the app was renamed from EasyEnglish.</summary>
+    private const string LegacyDatabaseFileName = "EasyEnglish.db";
+
+    /// <summary>
+    /// Renames a database left over from before the app was renamed. The work is in
+    /// <see cref="LegacyDatabaseMover"/>, which is plain file handling and therefore testable;
+    /// here it only has to be harmless when it fails — a failed move leaves the old file where it
+    /// was, and the app starts on an empty database rather than not starting at all.
+    /// </summary>
+    private static void MoveDatabaseFromLegacyName(string connectionString)
+    {
+        try
+        {
+            LegacyDatabaseMover.Move(connectionString, LegacyDatabaseFileName);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Could not move the database to its new name: {ex.Message}");
+        }
     }
 
     private static void RegisterServices(IServiceCollection services)

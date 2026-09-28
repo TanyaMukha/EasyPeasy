@@ -13,7 +13,7 @@ message into the browser console:
 - **Namespace:** `MukhaLab.BrowserConsoleLogger`
 - **Dependencies:** `Microsoft.Extensions.Logging`, `Microsoft.JSInterop` (9.0.8)
 - **Used by:** [`EasyPeasy.App`](../EasyPeasy.App) (MAUI Blazor Hybrid) — see
-  [Real usage in EasyPeasy.App](#real-usage-in-easyenglishapp).
+  [Real usage in EasyPeasy.App](#real-usage-in-easypeasyapp).
 
 ## Table of contents
 
@@ -21,7 +21,7 @@ message into the browser console:
 - [Installation](#installation)
 - [Path 1 — `ILoggerProvider` (`AddBrowserConsole`)](#path-1--iloggerprovider-addbrowserconsole)
 - [Path 2 — `IBrowserConsoleService`](#path-2--ibrowserconsoleservice)
-- [Real usage in EasyPeasy.App](#real-usage-in-easyenglishapp)
+- [Real usage in EasyPeasy.App](#real-usage-in-easypeasyapp)
 - [Known limitations & gotchas](#known-limitations--gotchas)
 - [Troubleshooting](#troubleshooting)
 

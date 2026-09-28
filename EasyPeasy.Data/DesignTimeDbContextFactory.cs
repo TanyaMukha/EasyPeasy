@@ -22,7 +22,7 @@ public class EasyPeasyDbContextFactory : IDesignTimeDbContextFactory<EasyPeasyDb
     {
         var optionsBuilder = new DbContextOptionsBuilder<EasyPeasyDbContext>();
 
-        optionsBuilder.UseSqlite("Data Source=../EasyEnglish.db");
+        optionsBuilder.UseSqlite("Data Source=../mukhalab.easypeasy.db");
 
         return new EasyPeasyDbContext(optionsBuilder.Options);
     }

@@ -44,6 +44,7 @@
     <Compile Include="..\EasyPeasy.App\Services\LanguageFlagHelper.cs" Link="Sources\LanguageFlagHelper.cs" />
     <Compile Include="..\EasyPeasy.App\Services\ImageDataUriHelper.cs" Link="Sources\ImageDataUriHelper.cs" />
     <Compile Include="..\EasyPeasy.App\Services\ConfirmationService.cs" Link="Sources\ConfirmationService.cs" />
+    <Compile Include="..\EasyPeasy.App\Services\LegacyDatabaseMover.cs" Link="Sources\LegacyDatabaseMover.cs" />
 
     <!-- Models: ITestSessionItem/TestModel/etc. that WordRatingCalculator operates on. -->
     <Compile Include="..\EasyPeasy.App\Models\Models.cs" Link="Sources\Models.cs" />
